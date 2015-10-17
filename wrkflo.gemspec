@@ -1,7 +1,7 @@
 Gem::Specification.new do |spec|
   spec.platform               = Gem::Platform::RUBY
   spec.name                   = 'wrkflo'
-  spec.version                = '0.0.2'
+  spec.version                = '0.0.3'
   spec.date                   = Date.today.strftime('%F')
   spec.summary                = 'Get working on things faster with predefined wrkflos.'
 
