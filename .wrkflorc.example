@@ -1,0 +1,9 @@
+work_remote:
+  sshfs:
+    host: myserver.example.com
+    remote_path: ~/sites/my_site
+    local_path: ~/remote
+  ssh:
+    host: myserver.example.com
+    command: cd ~/sites/my_site
+  sublime: ~/remote

@@ -1,0 +1,59 @@
+#! /usr/bin/env ruby
+
+require 'optparse'
+require 'pp'
+require 'yaml'
+
+require 'wrkflo/wrkflo'
+
+options = {
+  backward: false,
+  profile: ENV['HOME'] + '/.wrkflorc',
+  project: nil
+}
+OptionParser.new do |opts|
+  opts.banner     = "Usage: workon [options] <project>"
+  opts.separator  "Start working on things faster with predefined workflows"
+  opts.version    = "0.0.2"
+
+  opts.on("-b", "--backward", "Reverse step order and undo compatible steps") do |b|
+    options[:backward] = b
+  end
+
+  opts.on("-f [FILE]", "--file [FILE]",
+      "The file to interpret as the wrkflo profile.",
+      "Defaults to \"~/.wrkflorc\"") do |file|
+    options[:profile] = file
+  end
+
+  begin
+    # Parse and remove options from ARGV.
+    opts.parse!
+  rescue OptionParser::ParseError => error
+    # Without this rescue, Ruby would print the stack trace
+    # of the error. Instead, we want to show the error message,
+    # suggest -h or --help, and exit 1.
+    $stderr.puts error
+    $stderr.puts "(-h or --help will show valid options)"
+    exit 1
+  end
+end
+
+# An object representation of the entire workon profile, merged with
+# the options given for this run.
+workon = WorkOn.new options
+# The project workflow to execute on this run.
+project = workon[ARGV[0]]
+# If no project was specified, notify and exit
+if project == nil
+  puts "No project specified. Nothing to do."
+  exit 1
+end
+
+# Run the project workflow in the direction given from the terminal
+case workon.direction
+when :forward
+  project.run
+when :backward
+  project.unrun
+end
