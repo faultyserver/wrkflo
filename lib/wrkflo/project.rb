@@ -50,7 +50,7 @@ class Project
 
   # Post a message to the terminal with some identifying information
   def log message
-    puts "> Step ##{@current_step_num} (#{@current_step.name}): #{message}"
+    puts "  - Step ##{@current_step_num} (#{@current_step.name}): #{message}"
   end
 
 
@@ -58,6 +58,6 @@ class Project
     # Write a log message with a different prefix marker to visually
     # indicate a meta-type message
     def meta_log message
-      puts "- #{message}"
+      puts ">> #{message}"
     end
 end

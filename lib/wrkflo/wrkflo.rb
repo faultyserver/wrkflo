@@ -1,6 +1,6 @@
 require 'wrkflo/project'
 
-class WorkOn
+class WrkFlo
   attr_accessor :direction, :profile, :profile_source
 
   def initialize options
