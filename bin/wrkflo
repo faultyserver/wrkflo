@@ -6,6 +6,15 @@ require 'yaml'
 
 require 'wrkflo/wrkflo'
 
+
+# Abort execution with the given message, exiting with the given status code.
+def error_out message, status: 1
+  $stderr.puts message
+  $stderr.puts "Run `wrkflo --help` for usage information."
+  exit status
+end
+
+
 options = {
   backward: false,
   profile: ENV['HOME'] + '/.wrkflorc',
@@ -33,21 +42,22 @@ OptionParser.new do |opts|
     # Without this rescue, Ruby would print the stack trace
     # of the error. Instead, we want to show the error message,
     # suggest -h or --help, and exit 1.
-    $stderr.puts error
-    $stderr.puts "(-h or --help will show valid options)"
-    exit 1
+    error_out(error)
   end
 end
 
+
+project_name = ARGV[0]
+error_out('No project specified.') if project_name.nil?
+
 # An object representation of the entire wrkflo profile, merged with
 # the options given for this run.
-wrkflo = WrkFlo.new options
+wrkflo = WrkFlo.new(options)
 # The project workflow to execute on this run.
-project = wrkflo[ARGV[0]]
+project = wrkflo[project_name]
 # If no project was specified, notify and exit
 if project == nil
-  puts "No project specified. Nothing to do."
-  exit 1
+  error_out("Project '#{project_name}' does not exist in '#{wrkflo.profile_source}'.")
 end
 
 # Run the project workflow in the direction given from the terminal
