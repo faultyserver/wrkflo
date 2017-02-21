@@ -1,10 +1,9 @@
 class Editor < Step
   add_alias :editor
 
-  def setup
-    # TODO: Add ability to specify editor in ~/.wrkflorc
-    @editor = :sublime
-
+  def init
+    @editor = Profile.options['editor']
+    @name = "editor[#{@editor}]"
     @step = Step.create(@editor, config, project)
   end
 

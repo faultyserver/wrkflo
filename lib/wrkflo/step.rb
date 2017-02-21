@@ -26,6 +26,8 @@ class Step
     @config = config
     # The project that this step belongs to
     @project = project
+    # Run step-specific initialization
+    init
   end
 
   # A pass through to this step's project's log. If this step has no project,
@@ -39,9 +41,10 @@ class Step
   # These methods should be defined by all Step subclasses as given by their
   # descriptions.
 
+  # Work done immediately after initializing this step
+  def init;   end
   # Common work done before running and unrunning.
-  def setup; end
-
+  def setup;  end
   # The code to run when running this step normally
   def run
     log "Nothing to do."
