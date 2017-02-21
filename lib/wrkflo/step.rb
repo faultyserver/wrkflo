@@ -39,6 +39,9 @@ class Step
   # These methods should be defined by all Step subclasses as given by their
   # descriptions.
 
+  # Common work done before running and unrunning.
+  def setup; end
+
   # The code to run when running this step normally
   def run
     log "Nothing to do."

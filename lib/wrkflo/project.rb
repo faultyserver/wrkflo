@@ -24,6 +24,7 @@ class Project
       # Increment the current step so that the first step is 1
       @current_step_num += 1
       # Run the step
+      @current_step.setup
       @current_step.run
     end
 
@@ -40,6 +41,7 @@ class Project
       # Track the step being run
       @current_step = step
       # Run the step
+      @current_step.setup
       @current_step.unrun
       # Decrement the current step so that the last step is 1
       @current_step_num -= 1
