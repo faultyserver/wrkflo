@@ -1,4 +1,4 @@
-work_remote:
+my_site:
   sshfs:
     host: myserver.example.com
     remote_path: ~/sites/my_site
