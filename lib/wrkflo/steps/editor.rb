@@ -2,7 +2,8 @@ class Editor < Step
   add_alias :editor
 
   def init
-    @editor = Profile.options['editor']
+    puts config
+    @editor = config["which"] || Profile.options['editor']
     @name = "editor[#{@editor}]"
     @step = Step.create(@editor, config, project)
   end
