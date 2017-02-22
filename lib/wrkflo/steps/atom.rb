@@ -6,4 +6,3 @@ class AtomStep < Step
     `atom #{config}`
   end
 end
-0
