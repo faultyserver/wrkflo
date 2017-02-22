@@ -27,10 +27,10 @@ Or install it yourself as:
 
 The [.wrkflorc.example](.wrkflorc.example) file contains a simple `wrkflo`
 example that:
+
 1. Locally mounts a specific directory on a remote file system.
-2. Opens a terminal window and an ssh session into that remote directory.
-3. Opens a local instance of the [Sublime](https://www.sublimetext.com/) editor
-in the locally mounted remote directory.
+1. Opens a terminal window and an ssh session into that remote directory.
+1. Opens a local instance of the [Sublime](https://www.sublimetext.com/) editor in the locally mounted remote directory.
 
 To setup the work environment for `my_site` just copy the example file into
 place with `cp .wrkflorc.example ~/.wrkflorc` and run `wrkflo my_site`.
