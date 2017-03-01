@@ -1,3 +1,4 @@
+require 'wrkflo/version'
 require 'wrkflo/profile'
 require 'wrkflo/project'
 
@@ -22,7 +23,7 @@ class WrkFlo
     # For the default directories, try to scan them if they exist.
     DEFAULT_STEP_PATHS.each do |path|
       if Dir.exists?(path)
-        Dir[File.join(path, '*')].each{ |step_file| puts step_file; require step_file }
+        Dir[File.join(path, '*')].each{ |step_file| require step_file }
       end
     end
 
@@ -30,9 +31,8 @@ class WrkFlo
     # not available.
     configured_step_paths.each do |path|
       if Dir.exists?(path)
-        Dir[File.join(path, '*')].each{ |step_file| puts step_file; require step_file }
+        Dir[File.join(path, '*')].each{ |step_file| require step_file }
       else
-        puts path
         require path
       end
     end

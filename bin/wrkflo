@@ -23,7 +23,7 @@ options = {
 OptionParser.new do |opts|
   opts.banner     = "Usage: wrkflo [options] <project>"
   opts.separator  "Start working on things faster with predefined workflows"
-  opts.version    = "0.0.2"
+  opts.version    = Wrkflo::VERSION
 
   opts.on("-b", "--backward", "Reverse step order and undo compatible steps") do |b|
     options[:backward] = b
