@@ -3,11 +3,13 @@ require 'wrkflo/step'
 class Project
   attr_accessor :name, :steps
 
-  def initialize name, steps
+  def initialize name
     # The name of this project workflow
-    @name = name
+    @name         = name
+    # The raw configuration used by this project
+    @config       = Profile.projects[@name]
     # The steps that make up this workflow
-    @steps = steps.map{ |name, config| Step.create(name, config, self) }
+    @steps        = @config.map{ |name, conf| Step.create(name, conf, self) }
     # The step currently being executed
     @current_step = 0
   end
@@ -24,6 +26,7 @@ class Project
       # Increment the current step so that the first step is 1
       @current_step_num += 1
       # Run the step
+      @current_step.setup
       @current_step.run
     end
 
@@ -40,6 +43,7 @@ class Project
       # Track the step being run
       @current_step = step
       # Run the step
+      @current_step.setup
       @current_step.unrun
       # Decrement the current step so that the last step is 1
       @current_step_num -= 1
