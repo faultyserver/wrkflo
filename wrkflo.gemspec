@@ -10,11 +10,6 @@ Gem::Specification.new do |spec|
   spec.date                   = Date.today.strftime('%F')
   spec.summary                = 'Get working on things faster with predefined wrkflos.'
 
-  spec.required_ruby_version  = '>= 2.2.0'
-
-  spec.add_development_dependency "bundler", "~> 1.13"
-  spec.add_development_dependency "rake", "~> 10.0"
-
   spec.author                 = 'Jon Egeland'
   spec.email                  = 'jonegeland@gmail.com'
 
@@ -23,5 +18,13 @@ Gem::Specification.new do |spec|
   spec.homepage               = 'http://github.com/faultyserver/wrkflo'
   spec.license                = 'MIT'
 
+  spec.required_ruby_version  = '>= 2.2.0'
+
+  spec.add_dependency         "os", "~> 1.0"
+
   spec.executables            << 'wrkflo'
+
+
+  spec.add_development_dependency "bundler", "~> 1.13"
+  spec.add_development_dependency "rake", "~> 10.0"
 end
