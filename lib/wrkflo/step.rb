@@ -1,3 +1,4 @@
+require 'os'
 require 'wrkflo/configurable'
 
 class Step
@@ -62,4 +63,17 @@ class Step
   def unrun
     log "Nothing to do."
   end
+
+
+  protected
+
+    # Return true if being run on the given platform. If a block is given, run
+    # the block only if being run on the given platform and return the result.
+    def on platform
+      if block_given?
+        yield if OS.send("#{platform}?")
+      else
+        return OS.send("#{platform}?")
+      end
+    end
 end
