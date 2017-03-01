@@ -17,7 +17,7 @@ end
 
 options = {
   backward: false,
-  profile: ENV['HOME'] + '/.wrkflorc',
+  profile: ENV['HOME'] + '/.wrkflo/config',
   project: nil
 }
 OptionParser.new do |opts|
@@ -31,7 +31,7 @@ OptionParser.new do |opts|
 
   opts.on("-f [FILE]", "--file [FILE]",
       "The file to interpret as the wrkflo profile.",
-      "Defaults to \"~/.wrkflorc\"") do |file|
+      "Defaults to \"~/.wrkflo/config\"") do |file|
     options[:profile] = file
   end
 
