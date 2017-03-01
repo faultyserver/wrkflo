@@ -5,7 +5,7 @@ class Editor < Step
   property :path,   required: true
 
   def init
-    @editor = config.which || Profile.options['editor']
+    @editor = config.which
     @step = Step.create(@editor.to_sym, @raw_config, project)
     @name = "editor[#{@step.name}]"
   end
