@@ -1,8 +1,8 @@
 class SSHStep < Step
   add_alias :ssh
 
-  property :host,       required: true
-  property :directory,  required: true
+  property :host,       required: true, type: String
+  property :directory,  required: true, type: String
 
   def run
     log "SSHing into  #{config.host}  at  #{config.directory}"

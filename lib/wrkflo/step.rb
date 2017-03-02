@@ -35,6 +35,8 @@ class Step
     @project = project
     # Generate the finalized step configuration
     apply_configuration(@raw_config)
+    # Always validate the new configuration unless specifically told not to.
+    ensure_valid_configuration
     # Run step-specific initialization
     init
   end
@@ -70,10 +72,26 @@ class Step
     # Return true if being run on the given platform. If a block is given, run
     # the block only if being run on the given platform and return the result.
     def on platform
-      if block_given?
-        yield if OS.send("#{platform}?")
-      else
-        return OS.send("#{platform}?")
+      return OS.send("#{platform}?").tap{ |yn| yield yn if block_given? }
+    end
+
+
+  private
+
+    def ensure_valid_configuration
+      validate_configuration do |prop, value, reason|
+        prop_name = "`#{@name}.#{prop.name}`"
+        case reason
+        when :required
+          Notifier.error_out("required property #{prop_name} not provided for `#{@project.name}`.", type: "ConfigurationError")
+        when :type
+          Notifier.error_out(
+            "property #{prop_name} for `#{@project.name}` does not match expected type.",
+            "expected: #{prop.type_as_string}",
+            "got:      #{prop.value_type_as_string(value)}")
+        else
+          Notifier.error_out("Unknown error", type: "ConfigurationError")
+        end
       end
     end
 end

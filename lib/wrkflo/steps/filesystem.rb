@@ -2,10 +2,10 @@ class FileSystem < Step
   add_alias :filesystem
   add_alias :fs
 
-  property :which,        required: false,  default: Profile.options['filesystem']
-  property :host,         required: true
-  property :remote_path,  required: true
-  property :local_path,   required: true
+  property :which,        required: false,  type: String, default: Profile.options['filesystem']
+  property :host,         required: true,   type: String
+  property :remote_path,  required: true,   type: String
+  property :local_path,   required: true,   type: String
 
   def init
     @filesystem = config.which

@@ -1,3 +1,4 @@
+require 'wrkflo/notifier'
 require 'wrkflo/version'
 require 'wrkflo/profile'
 require 'wrkflo/project'
@@ -44,7 +45,9 @@ class WrkFlo
     Project.new(project) if Profile.projects[project]
   end
 
+
   private
+
     def configured_step_paths
       Profile.options['step_definitions'] || []
     end

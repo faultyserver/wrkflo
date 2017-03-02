@@ -3,9 +3,7 @@ class Profile
     @projects = YAML.load_file(source)
     @options = @projects.delete("options")
   rescue
-    $stderr.puts "Could not load configuration at '#{source}'."
-    $stderr.puts "Make sure the file exists before running `wrkflo`."
-    exit 1
+    Notifier.error_out("Could not load configuration at '#{source}'.", type: "ConfigurationError")
   end
 
   def self.projects;  @projects;  end
