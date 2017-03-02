@@ -1,10 +1,12 @@
-class AtomStep < Step
-  add_alias :atom
+module WRKFLO
+  class AtomStep < Step
+    add_alias :atom
 
-  property :path, required: true, type: String
+    property :path, required: true, type: String
 
-  def run
-    log "Opening an Atom Window at  #{config.path}"
-    `atom #{config.path}`
+    def run
+      log "Opening an Atom Window at  #{config.path}"
+      `atom #{config.path}`
+    end
   end
 end
