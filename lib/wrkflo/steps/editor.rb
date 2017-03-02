@@ -1,8 +1,8 @@
 class Editor < Step
   add_alias :editor
 
-  property :which,  required: false,  default: Profile.options['editor']
-  property :path,   required: true
+  property :which,  required: false,  type: String, default: Profile.options['editor']
+  property :path,   required: true,   type: String
 
   def init
     @editor = config.which

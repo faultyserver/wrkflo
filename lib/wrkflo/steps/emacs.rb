@@ -1,7 +1,7 @@
 class EmacsStep < Step
   add_alias :emacs
 
-  property :path, required: true
+  property :path, required: true, type: String
 
   def run
     log "Opening an Emacs frame at #{config.path}"
