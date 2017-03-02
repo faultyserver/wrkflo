@@ -4,7 +4,7 @@ require 'optparse'
 require 'pp'
 require 'yaml'
 
-require 'wrkflo/wrkflo'
+require 'wrkflo'
 
 
 options = {
@@ -15,7 +15,7 @@ options = {
 OptionParser.new do |opts|
   opts.banner     = "Usage: wrkflo [options] <project>"
   opts.separator  "Start working on things faster with predefined workflows"
-  opts.version    = Wrkflo::VERSION
+  opts.version    = WRKFLO::VERSION
 
   opts.on("-b", "--backward", "Reverse step order and undo compatible steps") do |b|
     options[:backward] = b
@@ -44,7 +44,7 @@ Notifier.error_out('No project specified.') if project_name.nil?
 
 # An object representation of the entire wrkflo profile, merged with
 # the options given for this run.
-wrkflo = WrkFlo.new(options)
+wrkflo = WRKFLO::WrkFlo.new(options)
 # The project workflow to execute on this run.
 project = wrkflo[project_name]
 # If no project was specified, notify and exit
