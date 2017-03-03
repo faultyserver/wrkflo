@@ -19,7 +19,7 @@ module WRKFLO
 
     def apply_configuration raw_config
       final_config = self.class.properties.each.with_object({}) do |(name, prop), h|
-        provided_value = raw_config[name.to_s]
+        provided_value = raw_config[name.to_s] rescue nil
         # Determine the real value based on the property's definition
         real_value = prop.resolve_value(provided_value)
         # Remember the real value in the actual configuration
