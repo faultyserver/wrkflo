@@ -4,15 +4,7 @@ require 'optparse'
 require 'pp'
 require 'yaml'
 
-require 'wrkflo/wrkflo'
-
-
-# Abort execution with the given message, exiting with the given status code.
-def error_out message, status: 1
-  $stderr.puts message
-  $stderr.puts "Run `wrkflo --help` for usage information."
-  exit status
-end
+require 'wrkflo'
 
 
 options = {
@@ -23,7 +15,7 @@ options = {
 OptionParser.new do |opts|
   opts.banner     = "Usage: wrkflo [options] <project>"
   opts.separator  "Start working on things faster with predefined workflows"
-  opts.version    = Wrkflo::VERSION
+  opts.version    = WRKFLO::VERSION
 
   opts.on("-b", "--backward", "Reverse step order and undo compatible steps") do |b|
     options[:backward] = b
@@ -42,22 +34,22 @@ OptionParser.new do |opts|
     # Without this rescue, Ruby would print the stack trace
     # of the error. Instead, we want to show the error message,
     # suggest -h or --help, and exit 1.
-    error_out(error)
+    Notifier.error_out(error)
   end
 end
 
 
 project_name = ARGV[0]
-error_out('No project specified.') if project_name.nil?
+Notifier.error_out('No project specified.') if project_name.nil?
 
 # An object representation of the entire wrkflo profile, merged with
 # the options given for this run.
-wrkflo = WrkFlo.new(options)
+wrkflo = WRKFLO::WrkFlo.new(options)
 # The project workflow to execute on this run.
 project = wrkflo[project_name]
 # If no project was specified, notify and exit
 if project == nil
-  error_out("Project '#{project_name}' does not exist in '#{wrkflo.profile_source}'.")
+  Notifier.error_out("Project '#{project_name}' does not exist in '#{wrkflo.profile_source}'.")
 end
 
 # Run the project workflow in the direction given from the terminal

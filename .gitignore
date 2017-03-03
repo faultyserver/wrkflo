@@ -26,3 +26,9 @@
 Gemfile.lock
 .ruby-version
 .ruby-gemset
+
+# packaged gems from older versions
+releases/
+
+# Makefile for easier local installs
+Makefile

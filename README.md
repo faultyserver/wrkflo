@@ -1,4 +1,4 @@
-# Wrkflo
+# wrkflo
 
 `wrkflo` is a Ruby Gem that helps you get working on things faster with
 predefined wrkflos.

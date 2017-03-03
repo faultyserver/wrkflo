@@ -5,7 +5,7 @@ require 'wrkflo/version'
 
 Gem::Specification.new do |spec|
   spec.name                   = 'wrkflo'
-  spec.version                = Wrkflo::VERSION
+  spec.version                = WRKFLO::VERSION
   spec.summary                = 'Get working on things faster with predefined wrkflos.'
   spec.platform               = Gem::Platform::RUBY
   spec.required_ruby_version  = '>= 2.2.0'
@@ -15,8 +15,8 @@ Gem::Specification.new do |spec|
   spec.homepage               = 'http://github.com/faultyserver/wrkflo'
   spec.license                = 'MIT'
 
-  spec.require_paths          = ["lib", "lib/wrkflo"]
-  spec.files                  += Dir['lib/wrkflo/*'] + Dir['lib/wrkflo/**/*']
+  spec.require_paths          = ["lib"]
+  spec.files                  += Dir['lib/*'] + Dir['lib/wrkflo/*'] + Dir['lib/wrkflo/**/*']
 
   spec.add_dependency         "os", "~> 1.0"
 
